@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Prodigious Test</title>   
+    <link type="text/css" href="~/Css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Css/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Css/prod/prodigious.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Juan Osorio Shop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                @if (Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("Log Out", "SignOut", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - For Prodigious</p>
+        </footer>
+    </div>
+
+    <script src="~/Js/jquery/jquery-1.10.2.min.js"></script>
+    <script src="~/Css/bootstrap/js/bootstrap.min.js"></script>    
+    <script src="~/Js/handlebars/handlebars.min.js"></script>
+    <script src="~/Js/jquery/jquery.validate.min.js"></script>
+    <script src="~/Js/jquery/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Js/prod/prodigious.min.js"></script>
+</body>
+</html>

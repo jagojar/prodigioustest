@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Shop</h2>
+
+
+<script id="productTrTemplate" type="text/x-handlebars-template">
+
+    {{#each this}}
+    <tr>
+        <td>{{Id}}</td>
+        <td>{{Name}}</td>
+        <td>{{Number}}</td>
+        <td>{{Price}}</td>
+        <td>{{PhotoName}}</td>
+        <td><a href="#" class="btn-link edit" data-id="{{Id}}" data-json='{"id":"{{Id}}", "Name":"{{Name}}", "Number": "{{Number}}", "Price": "{{Price}}", "PhotoName": "{{PhotoName}}" }'>Edit</a></td>
+    </tr>
+    {{/each}}
+</script>
+
+<script id="singleProductTemplate" type="text/x-handlebars-template">
+    <p>Product Detail</p>
+    <table class="table table-bordered table-condensed">
+        <tr><td><strong>Product Id:</strong></td><td>{{Id}}</td></tr>
+        <tr><td><strong>Name:</strong></td><td>{{Name}}</td></tr>
+        <tr><td><strong>Number:</strong></td><td>{{Number}}</td></tr>
+        <tr><td><strong>PhotoName:</strong></td><td>{{PhotoName}}</td>
+    </table>
+
+</script>
+
+<h2>Products Examples</h2>
+
+<input type="hidden" id="operationType" name="operationType" value="createProduct" />
+<div class="container">
+
+    <div class="row">
+        <p>List of products available in the shop:</p>
+        <table id="productListTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="">Id</th>
+                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Price</th>
+                    <th>Photo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="productListTBody"></tbody>
+        </table>
+
+        <button id="btnModalNewProduct" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Product</button>
+    </div>
+    <div class="row">
+        <hr />
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-sm-2">
+                <label for="searchProductId">Search a Product by Id:</label>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="searchProductId" name="searchProductId" required="required">
+                <label id="errorProductId" name="errorProductId" style="display:none; color:red">Please enter a product id (integer)</label>
+            </div>
+            <div class="col-sm-8">
+                <button id="btnSearchProduct" type="button" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-sm-6" id="productSearchResult"></div>
+        <div class="col-sm-6"></div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Product</h4>
+            </div>
+            <form id="product-form" name="product-form" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="productId" name="productId" />
+                    <div class="form-group">
+                        <label for="productName">Name:</label>
+                        <input type="text" class="form-control" id="productName" name="productName" required="required">
+                        <label id="errorName" name="errorName" style="display:none; color:red">Please enter a name</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="productNumber">Number:</label>
+                        <input type="text" class="form-control" id="productNumber" name="productNumber" required="required">                        
+                        <label id="errorNumber" name="errorNumber" style="display:none; color:red">Please enter a product number</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Price:</label>
+                        <input type="text" class="form-control" id="productPrice" name="productPrice" required="required">
+                        <label id="errorPrice" name="errorPrice" style="display:none; color:red">Please enter a price (number)</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPhoto">Photo</label>
+                        <input type="text" class="form-control" id="productPhoto" name="productPhoto" required="required">
+                        <label id="errorPhoto" name="errorPhoto" style="display:none; color:red">Please enter a photo path</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btnNewProduct" type="button" class="btn btn-primary">Save Product</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- Modal End -->
+
